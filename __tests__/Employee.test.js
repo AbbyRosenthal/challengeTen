@@ -1,11 +1,10 @@
-const { exportAllDeclaration } = require('@babel/types');
-const { default: test } = require('node:test')
+const { string } = require('yargs');
 const Employee = require('../lib/Employee')
 
-test('creates an employee object'), () => {
-    const employee = new Employee('Abby');
+test('creates an employee object', () => {
+    const employee = new Employee("", "", "");
 
-    expect(employee.name).toBe('Abby');
-    expect(employee.id).toBe('');
-    expect(employee.email).toBe("");
-}
+    expect(employee.name).toEqual(expect.any(String));
+    expect(employee.id).toEqual(expect.any(String));
+    expect(employee.email).toEqual(expect.any(String));
+});
