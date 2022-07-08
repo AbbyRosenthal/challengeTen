@@ -53,8 +53,12 @@ const init = () => {
                 type: "input",
                 name: "email",
                 message: "What is the email address for this manager?"
+            },
+            {
+                type: "input",
+                name: "officeNumber",
+                message: "What is the office number for the manager?"
             }
-            //add office number
         ])
             .then(data => {
                 const manager = new Manager(data.name, data.id, data.email)

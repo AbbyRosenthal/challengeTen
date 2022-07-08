@@ -3,33 +3,58 @@ const Employee = require("../lib/Employee")
 const generateTeam = (team) => {
     const generateManager = manager => {
         //make a card in HTML for each
-return `${manager.getName()}`
+        return `
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">${manager.getName()}</div>
+  <div class="card-body">
+    <h5 class="card-title">${manager.getRole()}</h5>
+    <p class="card-text">${manager.getId()}
+    ${manager.getEmail()}
+    ${manager.getOfficeNumber()}</p>
+  </div>
+</div>`
     }
     const generateIntern = intern => {
-        return `${intern.getName()}`
+        return `
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">${intern.getName()}</div>
+  <div class="card-body">
+    <h5 class="card-title">${intern.getRole()}</h5>
+    <p class="card-text">${intern.getId()}
+    ${intern.getEmail()}
+    ${intern.getSchool()}</p>
+  </div>
+</div>`
     }
 
     const generateEngineer = engineer => {
-return `${engineer.getName()}`
+        return `
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">${engineer.getName()}</div>
+  <div class="card-body">
+    <h5 class="card-title">${engineer.getRole()}</h5>
+    <p class="card-text">${engineer.getId()}
+    ${engineer.getEmail()}
+    ${engineer.getGithub()}</p>
+  </div>
+</div>`
     }
-    
     const html = [];
     html.push(team
-        .filter(employee => employee.getRole()=== "Manager")
+        .filter(employee => employee.getRole() === "Manager")
         .map(manager => generateManager(manager)))
-        
-        html.push(team
-            .filter(employee => employee.getRole()=== "Intern")
-            .map(intern => generateIntern(intern)))
-            .join("")
-            
-            html.push(team
-                .filter(employee => employee.getRole()=== "Engineer")
-                .map(engineer => generateEngineer(engineer)))
-                .join("")
-               return html.join("") 
-                
-            }
+
+    html.push(team
+        .filter(employee => employee.getRole() === "Intern")
+        .map(intern => generateIntern(intern)))
+        .join("")
+
+    html.push(team
+        .filter(employee => employee.getRole() === "Engineer")
+        .map(engineer => generateEngineer(engineer)))
+        .join("")
+    return html.join("")
+};
 
 module.exports = team => {
     return `
