@@ -11,7 +11,6 @@ const render = require('./src/generatePage')
 
 const teamMembers = [];
 
-
     const addManager = () => {
         return inquirer.prompt([
             {
@@ -38,14 +37,20 @@ const teamMembers = [];
                 type: "list",
                 name: "selectEmployee",
                 message: "What would you like to do next?",
-                choices: ['Add Intern', 'Add Engineer', 'Build my Team'],
-                when: (answer) => answer.selectEmployee === 'Build my Team',
+                choices: ['Add New Employee', 'Build my Team'],
+
             }
         ])
+        //selectEmployee is not defined... what do I need to fix???
             .then(data => {
+                let { name, id, email, officeNumber, selectEmployee} = data;
+                if (selectEmployee === 'Build my Team') {
                 const manager = new Manager(data.name, data.id, data.email, data.officeNumber)
                 teamMembers.push(manager)
                 buildTeam();
+            } else {
+                addTeamMembers();
+            }
             })
         }
         
