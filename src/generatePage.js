@@ -46,13 +46,13 @@ const generateTeam = (team) => {
 
     html.push(team
         .filter(employee => employee.getRole() === "Intern")
-        .map(intern => generateIntern(intern)))
-        .join("")
+        .map(intern => generateIntern(intern.join(""))))
+        
 
     html.push(team
         .filter(employee => employee.getRole() === "Engineer")
-        .map(engineer => generateEngineer(engineer)))
-        .join("")
+        .map(engineer => generateEngineer(engineer.join(""))))
+        
     return html.join("")
 };
 
@@ -91,3 +91,4 @@ module.exports = team => {
 </html>
     `;
 };
+

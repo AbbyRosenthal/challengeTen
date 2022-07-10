@@ -11,9 +11,45 @@ const render = require('./src/generatePage')
 
 const teamMembers = [];
 
-const init = () => {
-    addManager();
 
+    const addManager = () => {
+        return inquirer.prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the name of the team manager?"
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is the id number for this manager?"
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is the email address for this manager?"
+            },
+            {
+                type: "input",
+                name: "officeNumber",
+                message: "What is the office number for the manager?"
+            },
+            {
+                type: "list",
+                name: "selectEmployee",
+                message: "What would you like to do next?",
+                choices: ['Add Intern', 'Add Engineer', 'Build my Team'],
+                when: (answer) => answer.selectEmployee === 'Build my Team',
+            }
+        ])
+            .then(data => {
+                const manager = new Manager(data.name, data.id, data.email, data.officeNumber)
+                teamMembers.push(manager)
+                buildTeam();
+            })
+        }
+        
+     
     const addTeamMembers = () => {
         inquirer.prompt([
             {
@@ -37,35 +73,6 @@ const init = () => {
             })
     }
 
-    const addManager = () => {
-        return inquirer.prompt([
-            {
-                type: "input",
-                name: "name",
-                message: "What is the name of the team manager?"
-            },
-            {
-                type: "input",
-                name: "id",
-                message: "What is the id number for this manager?"
-            },
-            {
-                type: "input",
-                name: "email",
-                message: "What is the email address for this manager?"
-            },
-            {
-                type: "input",
-                name: "officeNumber",
-                message: "What is the office number for the manager?"
-            }
-        ])
-            .then(data => {
-                const manager = new Manager(data.name, data.id, data.email)
-                teamMembers.push(manager)
-                buildTeam();
-            })
-    }
 
     const addEngineer = () => {
         return inquirer.prompt([
@@ -90,13 +97,14 @@ const init = () => {
                 message: "What is the GitHub for this engineer?"
             }
         ])
-            .then(data => {
-                const engineer = new Engineer(data.name, data.id, data.email, data.github)
-                teamMembers.push(engineer)
-                addTeamMembers();
-            })
+        .then(data => {
+            const engineer = new Engineer(data.name, data.id, data.email, data.github)
+            teamMembers.push(engineer)
+            addTeamMembers();
+        })
     }
-
+    
+    addManager();
     const addIntern = () => {
         return inquirer.prompt([
             {
@@ -127,14 +135,9 @@ const init = () => {
             })
     }
     const buildTeam = () => {
-if (!fs.existsSync(DIST_DIR)) {
-    fs.mkdirSync(DIST_DIR)
-}
-fs.writeFileSync(DIST_PATH, render(teamMembers), "utf-8")
+        if (!fs.existsSync(DIST_DIR)) {
+            fs.mkdirSync(DIST_DIR)
+        }
+        fs.writeFileSync(DIST_PATH, render(teamMembers), "utf-8")
     }
-}
 
-init();
-
-
-module.exports = index; 
