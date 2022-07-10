@@ -47,12 +47,12 @@ const generateTeam = (team) => {
     html.push(team
         .filter(employee => employee.getRole() === "Intern")
         .map(intern => generateIntern(intern)))
-        // html.join();
+        html.join();
 
     html.push(team
         .filter(employee => employee.getRole() === "Engineer")
         .map(engineer => generateEngineer(engineer)))
-        // html.join();
+        html.join();
         
     return html.join("")
 };
