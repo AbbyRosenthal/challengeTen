@@ -41,7 +41,7 @@ const teamMembers = [];
 
             }
         ])
-        //selectEmployee is not defined... what do I need to fix???
+        
             .then(data => {
                 let { name, id, email, officeNumber, selectEmployee} = data;
                 if (selectEmployee === 'Build my Team') {
@@ -52,7 +52,7 @@ const teamMembers = [];
                 addTeamMembers();
             }
             })
-        }
+        };
         
      
     const addTeamMembers = () => {

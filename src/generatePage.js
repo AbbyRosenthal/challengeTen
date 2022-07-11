@@ -8,7 +8,7 @@ const generateTeam = (team) => {
   <div class="card-header">${manager.getName()}</div>
   <div class="card-body">
     <h5 class="card-title">${manager.getRole()}</h5>
-    <p class="card-text">${manager.getId()}
+    <p class="card-text">${manager.getId()} /n
     ${manager.getEmail()}
     ${manager.getOfficeNumber()}</p>
   </div>
@@ -20,7 +20,7 @@ const generateTeam = (team) => {
   <div class="card-header">${intern.getName()}</div>
   <div class="card-body">
     <h5 class="card-title">${intern.getRole()}</h5>
-    <p class="card-text">${intern.getId()}
+    <p class="card-text">${intern.getId()} 
     ${intern.getEmail()}
     ${intern.getSchool()}</p>
   </div>
